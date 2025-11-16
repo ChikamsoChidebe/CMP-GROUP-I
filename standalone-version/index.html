@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Internet Never Forgets</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/framer-motion@10/dist/framer-motion.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-black text-white font-mono overflow-x-hidden">
+    <div id="matrix-bg"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-cyan-400/30">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center h-16">
+            <div class="text-xl font-bold text-cyan-400 glow-text">TINF</div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#hero" class="hover:text-cyan-400 transition-colors">Home</a>
+                <a href="#storage" class="hover:text-cyan-400 transition-colors">Storage</a>
+                <a href="#retrieval" class="hover:text-cyan-400 transition-colors">Retrieval</a>
+                <a href="#simulation" class="hover:text-cyan-400 transition-colors">Simulation</a>
+                <a href="#education" class="hover:text-cyan-400 transition-colors">Education</a>
+                <a href="#safety" class="hover:text-cyan-400 transition-colors">Safety</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex items-center justify-center relative pt-16">
+        <div class="text-center z-10 max-w-6xl mx-auto px-4">
+            <h1 class="text-6xl md:text-8xl font-black mb-6 glow-text animate-pulse">
+                THE INTERNET<br>
+                <span class="text-pink-500">NEVER FORGETS</span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-12 text-gray-300 max-w-3xl mx-auto">
+                Explore how your digital footprint lives forever in the vast network of servers, 
+                caches, and archives that make up the modern internet.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
+                <button class="px-8 py-4 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-lg font-bold text-black hover:scale-105 transition-transform">
+                    Start Exploring
+                </button>
+                <button class="px-8 py-4 border border-cyan-400 rounded-lg font-bold text-cyan-400 hover:bg-cyan-400 hover:text-black transition-all">
+                    Learn More
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
