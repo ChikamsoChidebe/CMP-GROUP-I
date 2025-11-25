@@ -6,6 +6,7 @@ import DataRetrievalSection from './components/DataRetrievalSection';
 import GoogleSimulation from './components/GoogleSimulation';
 import EducationSection from './components/EducationSection';
 import SafetyTips from './components/SafetyTips';
+import TeamSection from './components/TeamSection';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import MatrixBackground from './components/MatrixBackground';
@@ -27,6 +28,7 @@ function App() {
         <GoogleSimulation />
         <EducationSection />
         <SafetyTips />
+        <TeamSection />
       </motion.main>
       
       <Footer />

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Shield, Menu, X, Eye, Database, Search, Users, Lock } from 'lucide-react';
+import { Shield, Menu, X, Eye, Database, Search, Users, Lock, UserCheck } from 'lucide-react';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,7 +20,8 @@ const Navigation = () => {
     { name: 'Retrieval', href: '#data-retrieval', icon: Search },
     { name: 'Simulation', href: '#simulation', icon: Eye },
     { name: 'Education', href: '#education', icon: Users },
-    { name: 'Safety', href: '#safety', icon: Lock }
+    { name: 'Safety', href: '#safety', icon: Lock },
+    { name: 'Team', href: '#team', icon: UserCheck }
   ];
 
   const scrollToSection = (href) => {
