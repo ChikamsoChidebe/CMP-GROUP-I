@@ -11,7 +11,7 @@ const DataStorageSection = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [dataPackets, setDataPackets] = useState([]);
-  const [matrixColumns, setMatrixColumns] = useState([]);
+
 
   const storageSteps = [
     {
@@ -119,27 +119,7 @@ const DataStorageSection = () => {
     return () => clearInterval(interval);
   }, [isAnimating]);
 
-  useEffect(() => {
-    // Generate matrix columns
-    const generateMatrix = () => {
-      const columns = [];
-      const columnCount = 40;
-      const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-      
-      for (let i = 0; i < columnCount; i++) {
-        columns.push({
-          id: i,
-          x: (i / columnCount) * 100,
-          chars: Array.from({ length: 20 }, () => chars[Math.floor(Math.random() * chars.length)]),
-          speed: 0.5 + Math.random() * 2,
-          opacity: 0.3 + Math.random() * 0.4
-        });
-      }
-      setMatrixColumns(columns);
-    };
 
-    generateMatrix();
-  }, []);
 
   const handleStepClick = (index) => {
     setActiveStep(index);
@@ -185,44 +165,7 @@ const DataStorageSection = () => {
             {/* Data Flow Canvas */}
             <div className="relative h-96 md:h-[600px] overflow-hidden rounded-2xl bg-black border-2 border-green-400/30">
               
-              {/* Matrix Background */}
-              <div className="absolute inset-0 overflow-hidden">
-                {matrixColumns.map((column) => (
-                  <div
-                    key={column.id}
-                    className="absolute top-0 text-green-400 font-mono text-sm leading-tight"
-                    style={{ 
-                      left: `${column.x}%`,
-                      opacity: column.opacity,
-                      fontSize: '12px'
-                    }}
-                  >
-                    {column.chars.map((char, index) => (
-                      <motion.div
-                        key={index}
-                        initial={{ y: -20, opacity: 0 }}
-                        animate={{ 
-                          y: [0, 600],
-                          opacity: [1, 0.8, 0]
-                        }}
-                        transition={{
-                          duration: 8 / column.speed,
-                          repeat: Infinity,
-                          delay: index * 0.1,
-                          ease: "linear"
-                        }}
-                        className="block"
-                        style={{
-                          textShadow: '0 0 5px #00ff41',
-                          filter: index === 0 ? 'brightness(1.5)' : 'brightness(0.7)'
-                        }}
-                      >
-                        {char}
-                      </motion.div>
-                    ))}
-                  </div>
-                ))}
-              </div>
+              <div className="absolute inset-0 bg-gradient-to-br from-green-900/20 via-black to-blue-900/20"></div>
 
               {/* Overlay for better node visibility */}
               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/40" />
@@ -285,11 +228,8 @@ const DataStorageSection = () => {
                         borderColor: isActive ? step.color : undefined,
                         boxShadow: isActive ? `0 0 30px ${step.color}, inset 0 0 20px rgba(0,0,0,0.8)` : '0 0 10px rgba(0,255,65,0.3), inset 0 0 20px rgba(0,0,0,0.8)'
                       }}
-                      animate={isActive ? { 
-                        scale: [1, 1.1, 1],
-                        rotate: [0, 360]
-                      } : {}}
-                      transition={{ duration: 2, repeat: isActive ? Infinity : 0 }}
+                      animate={isActive ? { scale: 1.1 } : { scale: 1 }}
+                      transition={{ duration: 0.3 }}
                     >
                       <IconComponent 
                         size={isActive ? 32 : 24} 

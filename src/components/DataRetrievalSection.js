@@ -11,7 +11,7 @@ const DataRetrievalSection = () => {
   const [searchProgress, setSearchProgress] = useState(0);
   const [isSearching, setIsSearching] = useState(false);
   const [foundData, setFoundData] = useState([]);
-  const [matrixColumns, setMatrixColumns] = useState([]);
+
 
   const retrievalSteps = [
     {
@@ -97,26 +97,21 @@ const DataRetrievalSection = () => {
     return () => clearInterval(interval);
   }, [isSearching]);
 
-  useEffect(() => {
-    const generateMatrix = () => {
-      const columns = [];
-      const columnCount = 30;
-      const chars = '01ABCDEFアイウエオカキクケコ';
-      
-      for (let i = 0; i < columnCount; i++) {
-        columns.push({
-          id: i,
-          x: (i / columnCount) * 100,
-          chars: Array.from({ length: 15 }, () => chars[Math.floor(Math.random() * chars.length)]),
-          speed: 1 + Math.random() * 2,
-          opacity: 0.2 + Math.random() * 0.3
+
+
+  const handleStepClick = (stepIndex) => {
+    setActiveDemo(stepIndex);
+    
+    setTimeout(() => {
+      const detailsSection = document.querySelector('#step-details');
+      if (detailsSection) {
+        detailsSection.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
         });
       }
-      setMatrixColumns(columns);
-    };
-
-    generateMatrix();
-  }, []);
+    }, 100);
+  };
 
   const startSearchDemo = async () => {
     setIsSearching(true);
@@ -125,19 +120,9 @@ const DataRetrievalSection = () => {
 
     for (let i = 0; i < retrievalSteps.length; i++) {
       setActiveDemo(i);
-      
-      // Simulate search progress
-      const step = retrievalSteps[i];
-      const progressIncrement = 100 / retrievalSteps.length;
-      
-      for (let progress = 0; progress <= progressIncrement; progress += 2) {
-        setSearchProgress((i * progressIncrement) + progress);
-        await new Promise(resolve => setTimeout(resolve, step.duration / (progressIncrement / 2)));
-      }
-
-      // Add found data for this step
-      const stepData = mockDataSources.filter((_, index) => index <= i);
-      setFoundData(stepData);
+      setSearchProgress(((i + 1) / retrievalSteps.length) * 100);
+      setFoundData(mockDataSources.slice(0, i + 1));
+      await new Promise(resolve => setTimeout(resolve, 800));
     }
 
     setIsSearching(false);
@@ -220,8 +205,8 @@ const DataRetrievalSection = () => {
                     </div>
                     
                     <div className="w-full bg-gray-700 rounded-full h-4 mb-6">
-                      <motion.div
-                        className="bg-gradient-to-r from-cyan-400 via-pink-500 to-purple-500 h-4 rounded-full"
+                      <div
+                        className="bg-gradient-to-r from-cyan-400 via-pink-500 to-purple-500 h-4 rounded-full transition-all duration-300"
                         style={{ width: `${searchProgress}%` }}
                       />
                     </div>
@@ -308,7 +293,7 @@ const DataRetrievalSection = () => {
                     borderColor: isActive ? step.color : undefined,
                     boxShadow: isActive ? `0 0 30px ${step.color}` : undefined
                   }}
-                  onClick={() => setActiveDemo(index)}
+                  onClick={() => handleStepClick(index)}
                   whileHover={{ scale: 1.02, y: -5 }}
                 >
                   <div className="flex items-center gap-4 mb-4">
@@ -442,6 +427,59 @@ const DataRetrievalSection = () => {
             </div>
           </div>
         </div>
+
+        {/* Step Details Section */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            id="step-details"
+            key={activeDemo}
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -50 }}
+            transition={{ duration: 0.5 }}
+            className="bg-gray-900/80 backdrop-blur-lg rounded-2xl p-10 cyber-border mb-20"
+          >
+            <div className="flex items-center gap-4 mb-6">
+              {React.createElement(retrievalSteps[activeDemo].icon, {
+                size: 48,
+                style: { color: retrievalSteps[activeDemo].color }
+              })}
+              <div>
+                <h3 className="text-3xl font-bold text-white mb-2">
+                  {retrievalSteps[activeDemo].title}
+                </h3>
+                <p className="text-xl text-gray-300">
+                  {retrievalSteps[activeDemo].description}
+                </p>
+              </div>
+            </div>
+            
+            <p className="text-lg text-gray-300 mb-8 leading-relaxed">
+              {retrievalSteps[activeDemo].details}
+            </p>
+
+            <div className="bg-gray-800/50 rounded-lg p-6">
+              <h4 className="text-xl font-bold text-cyan-400 mb-4">Data Sources:</h4>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {retrievalSteps[activeDemo].sources.map((source, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className="flex items-center gap-2 text-gray-300 bg-gray-700 rounded p-2"
+                  >
+                    <div 
+                      className="w-2 h-2 rounded-full"
+                      style={{ backgroundColor: retrievalSteps[activeDemo].color }}
+                    />
+                    {source}
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
 
         {/* Warning Section */}
         <motion.div

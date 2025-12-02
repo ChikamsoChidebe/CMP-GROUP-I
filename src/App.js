@@ -1,15 +1,15 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import HeroSection from './components/HeroSection';
-import DataStorageSection from './components/DataStorageSection';
-import DataRetrievalSection from './components/DataRetrievalSection';
-import GoogleSimulation from './components/GoogleSimulation';
-import EducationSection from './components/EducationSection';
-import SafetyTips from './components/SafetyTips';
-import TeamSection from './components/TeamSection';
+import React, { Suspense } from 'react';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import MatrixBackground from './components/MatrixBackground';
+
+const HeroSection = React.lazy(() => import('./components/HeroSection'));
+const DataStorageSection = React.lazy(() => import('./components/DataStorageSection'));
+const DataRetrievalSection = React.lazy(() => import('./components/DataRetrievalSection'));
+const GoogleSimulation = React.lazy(() => import('./components/GoogleSimulation'));
+const EducationSection = React.lazy(() => import('./components/EducationSection'));
+const SafetyTips = React.lazy(() => import('./components/SafetyTips'));
+const TeamSection = React.lazy(() => import('./components/TeamSection'));
 
 function App() {
   return (
@@ -17,19 +17,17 @@ function App() {
       <MatrixBackground />
       <Navigation />
       
-      <motion.main
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-      >
-        <HeroSection />
-        <DataStorageSection />
-        <DataRetrievalSection />
-        <GoogleSimulation />
-        <EducationSection />
-        <SafetyTips />
-        <TeamSection />
-      </motion.main>
+      <main>
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="text-cyan-400 text-xl">Loading...</div></div>}>
+          <HeroSection />
+          <DataStorageSection />
+          <DataRetrievalSection />
+          <GoogleSimulation />
+          <EducationSection />
+          <SafetyTips />
+          <TeamSection />
+        </Suspense>
+      </main>
       
       <Footer />
     </div>

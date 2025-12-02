@@ -14,15 +14,9 @@ const HeroSection = () => {
   ];
 
   const floatingIcons = [
-    { Icon: Eye, delay: 0, x: 150, y: 80, color: '#00f5ff', size: 100 },
-    { Icon: Database, delay: 1, x: -120, y: 120, color: '#ff0080', size: 90 },
-    { Icon: Cloud, delay: 2, x: 180, y: -90, color: '#8000ff', size: 110 },
-    { Icon: Server, delay: 3, x: -150, y: -60, color: '#00ff41', size: 85 },
-    { Icon: Wifi, delay: 4, x: 100, y: 150, color: '#ff8000', size: 95 },
-    { Icon: Globe, delay: 5, x: -80, y: -120, color: '#00f5ff', size: 105 },
-    { Icon: Shield, delay: 6, x: 200, y: 60, color: '#ff0080', size: 88 },
-    { Icon: Search, delay: 7, x: -180, y: 90, color: '#8000ff', size: 92 },
-    { Icon: Archive, delay: 8, x: 120, y: -150, color: '#00ff41', size: 98 }
+    { Icon: Eye, color: '#00f5ff' },
+    { Icon: Database, color: '#ff0080' },
+    { Icon: Cloud, color: '#8000ff' }
   ];
 
   // Typing animation effect
@@ -52,30 +46,18 @@ const HeroSection = () => {
 
   return (
     <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
-      {/* Enhanced Floating Background Elements */}
-      {floatingIcons.map(({ Icon, delay, x, y, color, size }, index) => (
-        <motion.div
+      {floatingIcons.map(({ Icon, color }, index) => (
+        <div
           key={index}
-          initial={{ opacity: 0, scale: 0, rotate: 0 }}
-          animate={{ 
-            opacity: [0.1, 0.3, 0.1], 
-            scale: [1, 1.2, 1],
-            rotate: [0, 360],
-            x: [0, x, 0],
-            y: [0, y, 0]
+          className="absolute opacity-20"
+          style={{ 
+            color,
+            left: `${20 + index * 30}%`,
+            top: `${20 + index * 20}%`
           }}
-          transition={{ 
-            duration: 12 + Math.random() * 8,
-            delay,
-            repeat: Infinity,
-            repeatType: "reverse",
-            ease: "easeInOut"
-          }}
-          className="absolute"
-          style={{ color }}
         >
-          <Icon size={size} className="drop-shadow-2xl" style={{ filter: `drop-shadow(0 0 20px ${color})` }} />
-        </motion.div>
+          <Icon size={60} />
+        </div>
       ))}
 
       <div className="text-center z-10 max-w-7xl mx-auto px-6">
@@ -212,64 +194,7 @@ const HeroSection = () => {
         </motion.div>
       </div>
 
-      {/* Enhanced Binary Rain Effect */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {Array.from({ length: 40 }).map((_, i) => (
-          <motion.div
-            key={i}
-            initial={{ y: -100, opacity: 0 }}
-            animate={{ 
-              y: window.innerHeight + 200, 
-              opacity: [0, 1, 1, 0],
-              rotate: [0, 360]
-            }}
-            transition={{
-              duration: Math.random() * 4 + 3,
-              repeat: Infinity,
-              delay: Math.random() * 8,
-              ease: "linear"
-            }}
-            className="absolute text-cyan-400 text-lg font-mono font-bold"
-            style={{ 
-              left: `${Math.random() * 100}%`,
-              textShadow: '0 0 10px currentColor'
-            }}
-          >
-            {Math.random() > 0.5 ? '1' : '0'}
-          </motion.div>
-        ))}
-      </div>
 
-      {/* Floating Algorithm Symbols */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {['∑', '∏', '∫', '∂', '∇', '∞', '≈', '≠', '≤', '≥'].map((symbol, i) => (
-          <motion.div
-            key={i}
-            initial={{ 
-              x: Math.random() * window.innerWidth,
-              y: window.innerHeight + 100,
-              opacity: 0,
-              rotate: 0
-            }}
-            animate={{ 
-              y: -100,
-              opacity: [0, 0.6, 0.6, 0],
-              rotate: 360,
-              x: Math.random() * window.innerWidth
-            }}
-            transition={{
-              duration: Math.random() * 8 + 10,
-              repeat: Infinity,
-              delay: Math.random() * 5,
-              ease: "linear"
-            }}
-            className="absolute text-purple-400 text-2xl font-bold"
-            style={{ textShadow: '0 0 15px currentColor' }}
-          >
-            {symbol}
-          </motion.div>
-        ))}
-      </div>
     </section>
   );
 };

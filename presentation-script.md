@@ -1,12 +1,12 @@
-# "The Internet Never Forgets" - 4-Person Interactive Presentation Script
+# "The Internet Never Forgets" - 5-Minute Interactive Presentation
 **CMP 103 Group I - Bingham University**
 
-## Presentation Flow & Speaker Assignments
+## Ultra-Interactive 5-Minute Format
 
-### Speaker 1 (Introduction & Hero Section) - 3 minutes
-### Speaker 2 (Data Journey & Storage) - 4 minutes  
-### Speaker 3 (Data Retrieval & Google Simulation) - 4 minutes
-### Speaker 4 (Real Cases & Safety Tips) - 4 minutes
+### Speaker 1 (Hook & Demo Setup) - 1 minute
+### Speaker 2 (Live Data Journey) - 1.5 minutes  
+### Speaker 3 (Live Google Search) - 1.5 minutes
+### Speaker 4 (Real Impact & Team) - 1 minute
 
 ---
 
