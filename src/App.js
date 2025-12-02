@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import MatrixBackground from './components/MatrixBackground';
+import PerformanceMonitor from './components/PerformanceMonitor';
 
 const HeroSection = React.lazy(() => import('./components/HeroSection'));
 const DataStorageSection = React.lazy(() => import('./components/DataStorageSection'));
@@ -14,6 +15,7 @@ const TeamSection = React.lazy(() => import('./components/TeamSection'));
 function App() {
   return (
     <div className="App min-h-screen bg-darker-bg text-white overflow-x-hidden">
+      <PerformanceMonitor />
       <MatrixBackground />
       <Navigation />
       
